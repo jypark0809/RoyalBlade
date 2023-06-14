@@ -27,6 +27,26 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
+  - m_GUID: a7337d814b8e4cb49a0658ebe7baba23
+    m_Address: MonsterController
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: acd2434e4cc5d0a47a38dc2642467bf8
+    m_Address: Monster
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: ee439293cd4baa745b5392d93038fbb5
+    m_Address: DamageText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: b761b75171baae84482cae39a2b886da
+    m_Address: CriticalDamageText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cf6e12a0bbd13ae4f87342d7312c2883, type: 2}
   m_SchemaSet:

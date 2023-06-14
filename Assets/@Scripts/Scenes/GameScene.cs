@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,15 +6,21 @@ using UnityEngine;
 public class GameScene : BaseScene
 {
     PlayerController _player;
-    UI_GameScene ui;
+    UI_GameScene _ui;
+    SpawningPool _spawningPool;
     Vector3 _spawnPos = new Vector3 (0, 5f, 0);
+
+    #region Action
+    public Action<int> OnWaveStart;
+    public Action OnWaveEnd;
+    #endregion
 
     protected override void Init()
     {
         base.Init();
 
         // 府家胶 肺爹 (Addressable)
-        Managers.Resource.LoadAllAsync<Object>("PreLoad", (key, count, totalCount) =>
+        Managers.Resource.LoadAllAsync<UnityEngine.Object>("PreLoad", (key, count, totalCount) =>
         {
             Debug.Log($"{key} {count}/{totalCount}");
 
@@ -32,12 +39,20 @@ public class GameScene : BaseScene
         _player = Managers.Object.Spawn<PlayerController>(_spawnPos, "Player");
 
         // UI 积己
-        ui = Managers.UI.ShowSceneUI<UI_GameScene>();
-        ui.OnPlayerJump += _player.Jump;
-        ui.OnPlayerGuard += _player.Guard;
-        ui.OnPlayerAttack += _player.Attack;
+        _ui = Managers.UI.ShowSceneUI<UI_GameScene>();
+        _ui.OnPlayerJump += _player.Jump;
+        _ui.OnPlayerGuard += _player.Guard;
+        _ui.OnPlayerAttack += _player.Attack;
 
         Camera.main.GetComponent<CameraController>().PlayerTransform = _player.gameObject.transform;
+
+        // 阁胶磐 积己
+        if (_spawningPool == null)
+            _spawningPool = gameObject.AddComponent<SpawningPool>();
+        _spawningPool.StartSpawn();
+
+        // Bgm
+        Managers.Sound.Play(Define.Sound.Bgm, "Bgm_Game", volume: 0.6f);
     }
 
     public override void Clear()
@@ -47,8 +62,8 @@ public class GameScene : BaseScene
 
     private void OnDestroy()
     {
-        ui.OnPlayerJump -= _player.Jump;
-        ui.OnPlayerGuard -= _player.Guard;
-        ui.OnPlayerAttack -= _player.Attack;
+        _ui.OnPlayerJump -= _player.Jump;
+        _ui.OnPlayerGuard -= _player.Guard;
+        _ui.OnPlayerAttack -= _player.Attack;
     }
 }

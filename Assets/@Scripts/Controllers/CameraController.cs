@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
 {
@@ -13,7 +9,7 @@ public class CameraController : MonoBehaviour
         if (PlayerTransform == null)
             return;
 
-        if (PlayerTransform.position.y <= 4.5)
+        if (PlayerTransform.position.y <= 7f)
             return;
 
         transform.position = new Vector3(PlayerTransform.transform.position.x, PlayerTransform.transform.position.y, -10);

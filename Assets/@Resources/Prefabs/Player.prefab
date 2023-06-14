@@ -104,11 +104,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: da37c8a8d3ddabf43be1a90d8fcb85bf, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!58 &1940861332035747678
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -144,17 +144,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1940861332035747672}
     m_Modifications:
-    - target: {fileID: 1681808170223585276, guid: be65551eecc7ea64589c7932ed258169, type: 3}
-      propertyPath: lengthInSec
-      value: 0.15
+    - target: {fileID: 1681808170223585277, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
       objectReference: {fileID: 0}
-    - target: {fileID: 1681808170223585276, guid: be65551eecc7ea64589c7932ed258169, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.15
+    - target: {fileID: 1681808170223585277, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
       objectReference: {fileID: 0}
-    - target: {fileID: 1957456001836442911, guid: be65551eecc7ea64589c7932ed258169, type: 3}
-      propertyPath: m_Offset.y
-      value: 2
+    - target: {fileID: 1681808170223585277, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681808170223585277, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681808170223585278, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805518476969034538, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3879975523637581710, guid: be65551eecc7ea64589c7932ed258169, type: 3}
       propertyPath: m_RootOrder
@@ -200,21 +212,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4116982615402460806, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4217842100069291762, guid: be65551eecc7ea64589c7932ed258169, type: 3}
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
-    - target: {fileID: 6693947162167648181, guid: be65551eecc7ea64589c7932ed258169, type: 3}
-      propertyPath: m_Offset.y
-      value: 2
+    - target: {fileID: 4727705145483031322, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6985662887103722227, guid: be65551eecc7ea64589c7932ed258169, type: 3}
-      propertyPath: lengthInSec
-      value: 0.1
+    - target: {fileID: 4727705145483031322, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6985662887103722227, guid: be65551eecc7ea64589c7932ed258169, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.1
+    - target: {fileID: 4727705145483031322, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724488415104267555, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815593366314758789, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815593366314758789, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815593366314758789, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815593366314758789, guid: be65551eecc7ea64589c7932ed258169, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be65551eecc7ea64589c7932ed258169, type: 3}

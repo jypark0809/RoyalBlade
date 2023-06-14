@@ -12,21 +12,27 @@ public class Sword : MonoBehaviour
 
     enum SwingType
     {
-        Second,
         First,
-        Ult,
+        Second,
+        // Ult,
     }
 
     public Define.WeaponType WeaponType { get; set; } = Define.WeaponType.Sword;
     SwingType swingType = SwingType.First;
 
+    void Start()
+    {
+        Owner = Managers.Game.Player;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         MonsterController mc = collision.transform.GetComponent<MonsterController>();
         
-        if (mc == null || mc.isActiveAndEnabled == false)
+        if (!mc.IsValid())
             return;
 
+        mc.Rigidbody.AddForce(Vector2.up * 15f, ForceMode2D.Impulse);
         mc.OnDamaged(Owner, Damage);
     }
 
@@ -35,8 +41,9 @@ public class Sword : MonoBehaviour
         int currentSwingType = (int)swingType;
         SetParticles(swingType);
         _swingParticles[currentSwingType].gameObject.SetActive(true);
-        currentSwingType = (currentSwingType + 1) % 2;
+        currentSwingType = (currentSwingType + 1) % 2; // 좌,우 번갈아 가면서 베기
         swingType = (SwingType)currentSwingType;
+        Util.PlaySlashSound();
     }
 
     void SetParticles(SwingType swingType)
@@ -45,7 +52,11 @@ public class Sword : MonoBehaviour
             return;
 
         transform.position = Managers.Game.Player.transform.position;
-
         var main = _swingParticles[(int)swingType].main;
+    }
+
+    public void WeaponSkill()
+    {
+
     }
 }

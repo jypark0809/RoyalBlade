@@ -10,6 +10,13 @@ public class Define : MonoBehaviour
         GameScene,
     }
 
+    public enum Sound
+    {
+        Bgm,
+        Effect,
+        MaxCount,
+    }
+
     public enum UIEvent
     {
         Click,
@@ -26,4 +33,7 @@ public class Define : MonoBehaviour
         None,
         Sword,
     }
+
+    public const int MAX_JUMP_COUNT = 3;
+    public const int MAX_ATTACK_COUNT = 10;
 }

@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class ObjectManager
 {
-    public PlayerController Player { get; private set; }
-    public Queue<MonsterController> Monsters { get; } = new Queue<MonsterController>();
+    public PlayerController Player { get; set; }
+    public MonsterController Monsters { get; set; }
 
     public T Spawn<T>(Vector3 position, string prefabName) where T : MonoBehaviour
     {
@@ -29,12 +29,46 @@ public class ObjectManager
             GameObject go = Managers.Resource.Instantiate(prefabName, pooling: true);
             MonsterController mc = go.GetOrAddComponent<MonsterController>();
             go.transform.position = position;
+
+            Monsters = mc;
             go.name = prefabName;
-            Monsters.Enqueue(mc);
 
             return mc as T;
         }
 
         return null;
+    }
+
+    public void Despawn<T>(T obj) where T : BaseController
+    {
+        if (obj.IsValid() == false)
+        {
+            return;
+        }
+
+        System.Type type = typeof(T);
+
+        if (type == typeof(PlayerController))
+        {
+            // TODO
+            // 플레이어 사망
+        }
+        else if (type == typeof(MonsterController))
+        {
+            Managers.Resource.Destroy(obj.gameObject);
+        }
+    }
+
+    public void ShowDamageText(Vector2 pos, int damage, Transform parent, bool isCritical = false)
+    {
+        string prefabName;
+        if (isCritical)
+            prefabName = "CriticalDamageText";
+        else
+            prefabName = "DamageText";
+
+        GameObject go = Managers.Resource.Instantiate(prefabName, pooling: true);
+        DamageText damageText = go.GetOrAddComponent<DamageText>();
+        damageText.SetInfo(pos, damage, parent);
     }
 }

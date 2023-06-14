@@ -10,7 +10,7 @@ public class ResourceManager
     // 실제 로드한 리소스.
     Dictionary<string, UnityEngine.Object> _resources = new Dictionary<string, UnityEngine.Object>();
 
-    #region 리소스 로드
+    #region Load Resource
     public T Load<T>(string key) where T : Object
     {
         // type이 스프라이트면 Texture2D를 받기 때문에 Sprite.Create을 함
@@ -37,8 +37,8 @@ public class ResourceManager
             return null;
         }
 
-        //if (pooling)
-        //    return Managers.Pool.Pop(prefab);
+        if (pooling)
+            return Managers.Pool.Pop(prefab);
 
         GameObject go = Object.Instantiate(prefab, parent);
 
@@ -56,10 +56,9 @@ public class ResourceManager
 
         Object.Destroy(go);
     }
-
     #endregion
-    #region 어드레서블
 
+    #region Addressable
     public void LoadAsync<T>(string key, Action<T> callback = null) where T : UnityEngine.Object
     {
         if (_resources.TryGetValue(key, out Object resource))

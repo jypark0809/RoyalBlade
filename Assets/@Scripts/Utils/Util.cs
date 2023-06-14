@@ -50,4 +50,18 @@ public static class Util
 
         return null;
     }
+
+    public static void PlaySlashSound()
+    {
+        int rand = Random.Range(0, 2);
+        switch (rand)
+        {
+            case 0:
+                Managers.Sound.Play(Define.Sound.Effect, "Slash_01");
+                break;
+            case 1:
+                Managers.Sound.Play(Define.Sound.Effect, "Slash_02");
+                break;
+        }
+    }
 }
