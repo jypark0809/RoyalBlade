@@ -24,9 +24,10 @@ public class SpawningPool : MonoBehaviour
 
     IEnumerator CoUpdateSpawningPool()
     {
-        // Next Wave UI
-
         yield return new WaitForSeconds(2f);
+
+        // Next Wave UI
+        (Managers.UI.SceneUI as UI_GameScene).SetWaveText();
 
         // Spawn Monster
         _spawnPosition = _game.Player.transform.position + new Vector3(0, 20f, 0);
@@ -35,7 +36,7 @@ public class SpawningPool : MonoBehaviour
         _coUpdateSpawningPool = null;
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         if (_game != null)
             _game.OnWaveIndexChanged -= HandleOnWaveIndexChanged;

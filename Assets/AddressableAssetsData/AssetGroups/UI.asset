@@ -22,6 +22,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
+  - m_GUID: 5e08e182f7328c94ea39b67aab4c6c2f
+    m_Address: UI_SelectWeapon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 3fdfe6fb3468bdf479493ccd1fdcde61
+    m_Address: UI_GameOver
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cf6e12a0bbd13ae4f87342d7312c2883, type: 2}
   m_SchemaSet:

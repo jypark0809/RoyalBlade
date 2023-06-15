@@ -47,6 +47,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
+  - m_GUID: 2f62a9175df0501448bd56123cfd206b
+    m_Address: Spear
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 69e0cc5add1b6dd4a9de9be51a2011ca
+    m_Address: Wand
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 6418a3d5a0a753f4fbbdc4a1176b930f
+    m_Address: Explosion
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cf6e12a0bbd13ae4f87342d7312c2883, type: 2}
   m_SchemaSet:

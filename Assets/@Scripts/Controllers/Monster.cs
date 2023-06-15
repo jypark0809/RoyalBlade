@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : BaseController
 {
     int _hp;
     public int Hp
@@ -11,52 +12,56 @@ public class Monster : MonoBehaviour
         set
         {
             _hp = value;
-            (Managers.UI.SceneUI as UI_GameScene).SetHpSlider(Hp, MaxHp);
+
+            if (IsBottom)
+                (Managers.UI.SceneUI as UI_GameScene).SetHpSlider(Hp, MaxHp);
         }
     }
-    public int MaxHp { get; set; } = 100;
+    public int MaxHp { get; set; }
+    public bool IsBottom { get; set; } = false;
+    MonsterController _mc;
 
-    void Awake()
+    public override void Init()
     {
-        Init();
+        
     }
 
-    private void Init()
+    public void SetInfo(int hp, MonsterController mc)
     {
+        MaxHp = hp;
         Hp = MaxHp;
-    }
-
-    public void SetInfo(int hp)
-    {
-        Hp = hp;
+        _mc = mc;
     }
 
     public void OnCollideBySkill(PlayerController attacker)
     {
-        Managers.Sound.Play(Define.Sound.Effect, "Boom");
-        Managers.Resource.Destroy(gameObject);
+        OnDead();
     }
 
     public bool OnDamaged(PlayerController attacker, int damage)
     {
-        bool isCritical = false;
-        if (attacker != null)
-        {
-            //农府萍拿 利侩
-            if (UnityEngine.Random.value <= attacker.CriRate)
-            {
-                damage = damage * 2;
-                isCritical = true;
-            }
+        #region Critical
+        //bool isCritical = false;
+        //if (attacker != null)
+        //{
+        //    //农府萍拿 利侩
+        //    if (UnityEngine.Random.value <= attacker.CriRate)
+        //    {
+        //        damage = damage * 2;
+        //        isCritical = true;
+        //    }
 
-        }
+        //}
+        #endregion
 
-        Managers.Object.ShowDamageText(transform.position, damage, this.transform, isCritical);
+        Managers.Game.ComboCount++;
+        Managers.Object.ShowDamageText(transform.position, damage, this.transform);
 
         Hp -= damage;
         if (Hp <= 0)
         {
             Hp = 0;
+            Managers.Game.AttackCount++;
             OnDead();
             return false;
         }
@@ -66,8 +71,16 @@ public class Monster : MonoBehaviour
 
     protected void OnDead()
     {
-        Managers.Game.AttackCount++;
+        PlayEffect();
         Managers.Sound.Play(Define.Sound.Effect, "Boom");
         Managers.Resource.Destroy(gameObject);
+        _mc.IsMonsterStackEmpty();
+    }
+
+    void PlayEffect()
+    {
+        ParticleSystem effect = Managers.Resource.Instantiate("Explosion").GetComponent<ParticleSystem>();
+        effect.transform.position = transform.position;
+        effect.Play();
     }
 }

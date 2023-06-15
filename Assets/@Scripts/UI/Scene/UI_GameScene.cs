@@ -37,12 +37,14 @@ public class UI_GameScene : UI_Scene
     {
         SpecialSkillImage,
         WeaponSkillImage,
+        GuardCoolTimeImage,
     }
 
     enum Texts
     {
         ComboText,
         MonsterHpText,
+        WaveText,
     }
     #endregion
 
@@ -135,6 +137,11 @@ public class UI_GameScene : UI_Scene
             _hearts[i].gameObject.SetActive(true);
     }
 
+    public void SetWaveText()
+    {
+        GetText((int)Texts.WaveText).text = $"Wave {Managers.Game.CurrentWaveIndex}";
+    }
+
     public void SetHpSlider(int hp, int maxHp)
     {
         Slider slider = GetObject((int)GameObjects.HpSlider).GetComponent<Slider>();
@@ -154,8 +161,16 @@ public class UI_GameScene : UI_Scene
         GetImage((int)Images.SpecialSkillImage).fillAmount = (float)Managers.Game.JumpCount/Define.MAX_JUMP_COUNT;
     }
 
+    public void FillGuardCoolTime(float cooltime)
+    {
+        GetImage((int)Images.GuardCoolTimeImage).fillAmount = cooltime / Define.GUARD_COOLTIME;
+    }
+
     public void FillWeaponSkillGuage()
     {
+        if (Managers.Game.AttackCount == 0)
+            GetObject((int)GameObjects.AttackBackPanel).SetActive(false);
+
         if (Managers.Game.AttackCount >= Define.MAX_ATTACK_COUNT)
             GetObject((int)GameObjects.AttackBackPanel).SetActive(true);
 
@@ -216,7 +231,6 @@ public class UI_GameScene : UI_Scene
         {
             Managers.Game.Player.SpecialSkill();
         }
-            
 
         _jumpButtonRectTransform.localPosition = _jumpButtonOriginalPos;
     }
@@ -250,7 +264,6 @@ public class UI_GameScene : UI_Scene
         Vector2 dragPos = pointerEventData.position;
 
         float dist = (dragPos.y - _touchPos.y);
-        Debug.Log(dragPos);
 
         // 아래로 드래그
         if (dragPos.y < _touchPos.y)
@@ -273,7 +286,7 @@ public class UI_GameScene : UI_Scene
 
         PointerEventData pointerEventData = baseEventData as PointerEventData;
         if (pointerEventData.position.y >= 400)
-            Debug.Log("WeaponSkill");
+            Managers.Game.Player.Weapon.WeaponSkill();
 
         _attackButtonRectTransform.localPosition = _attackButtonOriginalPos;
     }
@@ -283,5 +296,12 @@ public class UI_GameScene : UI_Scene
     {
         _touchPos = Input.mousePosition;
         OnPlayerGuard?.Invoke();
+    }
+
+    void OnDisable()
+    {
+        Managers.Game.OnComboCountChanged -= SetComboText;
+        Managers.Game.OnJumpCountChanged -= FillSpecialSkillGuage;
+        Managers.Game.OnAttackCountChanged -= FillWeaponSkillGuage;
     }
 }

@@ -10,11 +10,6 @@ public class GameScene : BaseScene
     SpawningPool _spawningPool;
     Vector3 _spawnPos = new Vector3 (0, 5f, 0);
 
-    #region Action
-    public Action<int> OnWaveStart;
-    public Action OnWaveEnd;
-    #endregion
-
     protected override void Init()
     {
         base.Init();
@@ -34,6 +29,8 @@ public class GameScene : BaseScene
     void StartLoaded()
     {
         SceneType = Define.Scene.GameScene;
+
+        Managers.UI.ShowPopupUI<UI_SelectWeapon>();
 
         // 플레이어 생성
         _player = Managers.Object.Spawn<PlayerController>(_spawnPos, "Player");
@@ -60,7 +57,7 @@ public class GameScene : BaseScene
 
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         _ui.OnPlayerJump -= _player.Jump;
         _ui.OnPlayerGuard -= _player.Guard;

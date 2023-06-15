@@ -7,6 +7,7 @@ using UnityEngine.Playables;
 public class GameManager
 {
     public PlayerController Player { get; set; }
+    public Define.WeaponType PlayerWeapon = Define.WeaponType.None;
 
     public Action OnWaveIndexChanged;
     public Action<int> OnComboCountChanged;
@@ -65,5 +66,19 @@ public class GameManager
     public void GameOver()
     {
         Time.timeScale = 0;
+        Managers.UI.ShowPopupUI<UI_GameOver>();
+    }
+
+    public void Clear()
+    {
+        _currentWaveIndex = 1;
+        _comboCount = 0;
+        _jumpCount = 0;
+        _attackCount = 0;
+
+        OnWaveIndexChanged = null;
+        OnComboCountChanged = null;
+        OnJumpCountChanged = null;
+        OnAttackCountChanged = null;
     }
 }

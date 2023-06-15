@@ -2,41 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class Sword : Weapon
 {
     [SerializeField]
     ParticleSystem[] _swingParticles;
 
-    public PlayerController Owner { get; set; }
-    public int Damage { get; set; } = 100;
-
-    enum SwingType
+    public enum SwingType
     {
         First,
         Second,
-        // Ult,
+        WeaponSkill,
     }
 
-    public Define.WeaponType WeaponType { get; set; } = Define.WeaponType.Sword;
     SwingType swingType = SwingType.First;
 
     void Start()
     {
         Owner = Managers.Game.Player;
+        WeaponType = Define.WeaponType.Sword;
+        Damage = 50;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        MonsterController mc = collision.transform.GetComponent<MonsterController>();
-        
-        if (!mc.IsValid())
-            return;
-
-        mc.Rigidbody.AddForce(Vector2.up * 15f, ForceMode2D.Impulse);
-        mc.OnDamaged(Owner, Damage);
-    }
-
-    public void Slash()
+    public override void Slash()
     {
         int currentSwingType = (int)swingType;
         SetParticles(swingType);
@@ -55,8 +42,12 @@ public class Sword : MonoBehaviour
         var main = _swingParticles[(int)swingType].main;
     }
 
-    public void WeaponSkill()
+    public override void WeaponSkill()
     {
-
+        swingType = SwingType.WeaponSkill;
+        SetParticles(swingType);
+        _swingParticles[(int)swingType].gameObject.SetActive(true);
+        swingType = SwingType.First;
+        Managers.Game.AttackCount = 0;
     }
 }

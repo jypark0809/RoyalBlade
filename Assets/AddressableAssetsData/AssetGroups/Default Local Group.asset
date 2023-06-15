@@ -16,15 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 36c055343d627424ba28c2699b647cbe
-  m_SerializeEntries:
-  - m_GUID: a1fe00703a5c7a946b398bad40753eb7
-    m_Address: Assets/@Resources/Sounds/Effect/Slash_02.mp3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 017f319c29839744ea4ba443009d0334
-    m_Address: Assets/@Resources/Sounds/Effect/Slash_01.mp3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cf6e12a0bbd13ae4f87342d7312c2883, type: 2}
   m_SchemaSet:

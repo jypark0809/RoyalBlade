@@ -9,6 +9,7 @@ public class Managers : MonoBehaviour
 {
     static Managers s_instance = null;
     static Managers Instance { get { Init(); return s_instance; } }
+    private static bool applicationIsQuitting = false;
 
     #region Contents
     GameManager _game = new GameManager();
@@ -38,6 +39,9 @@ public class Managers : MonoBehaviour
 
     public static void Init()
     {
+        if (applicationIsQuitting)
+            return;
+
         if (s_instance == null)
         {
             GameObject go = GameObject.Find("@Managers");
@@ -58,5 +62,11 @@ public class Managers : MonoBehaviour
     public static void Clear()
     {
         
+    }
+
+    public void OnDestroy()
+    {
+        Debug.Log("Gets destroyed");
+        applicationIsQuitting = true;
     }
 }

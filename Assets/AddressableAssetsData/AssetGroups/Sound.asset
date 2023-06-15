@@ -27,6 +27,31 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
+  - m_GUID: 017f319c29839744ea4ba443009d0334
+    m_Address: Slash_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: a1fe00703a5c7a946b398bad40753eb7
+    m_Address: Slash_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 45be09caaef91a04bbfbf2429c27a4db
+    m_Address: Jump
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 58eb035199085e949b3dd1b82b1fdf21
+    m_Address: Boom
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: b32328127a93de94e8e5666a16508ce6
+    m_Address: OnDamaged
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cf6e12a0bbd13ae4f87342d7312c2883, type: 2}
   m_SchemaSet:
