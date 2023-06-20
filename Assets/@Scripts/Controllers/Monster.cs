@@ -55,7 +55,7 @@ public class Monster : BaseController
         #endregion
 
         Managers.Game.ComboCount++;
-        Managers.Object.ShowDamageText(transform.position, damage, this.transform);
+        Managers.Object.ShowDamageText(transform.position, damage);
 
         Hp -= damage;
         if (Hp <= 0)
@@ -71,16 +71,9 @@ public class Monster : BaseController
 
     protected void OnDead()
     {
-        PlayEffect();
+        Managers.Object.ShowDestroyEffect(transform.position);
         Managers.Sound.Play(Define.Sound.Effect, "Boom");
         Managers.Resource.Destroy(gameObject);
         _mc.IsMonsterStackEmpty();
-    }
-
-    void PlayEffect()
-    {
-        ParticleSystem effect = Managers.Resource.Instantiate("Explosion").GetComponent<ParticleSystem>();
-        effect.transform.position = transform.position;
-        effect.Play();
     }
 }

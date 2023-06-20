@@ -15,11 +15,14 @@ public class MonsterController : BaseController
     {
         base.Init();
         Rigidbody = GetComponent<Rigidbody2D>();
+    }
 
+    void OnEnable()
+    {
         for (int i = MONSTER_SPAWN_COUNT; i > 0; i--)
         {
             GameObject go = Managers.Resource.Instantiate("Monster", transform);
-            go.transform.localPosition = new Vector2(0, (i-1) * 2);
+            go.transform.localPosition = new Vector2(0, (i - 1) * 2);
             go.name = $"Monster_{i}";
         }
 
@@ -27,7 +30,7 @@ public class MonsterController : BaseController
         foreach (Monster monster in monsters)
         {
             int curWave = Managers.Game.CurrentWaveIndex;
-            int monsterHp = (int)Mathf.Pow(2, curWave); 
+            int monsterHp = (int)Mathf.Pow(2, curWave);
             monster.SetInfo(monsterHp, this);
             MonsterStack.Push(monster); // 맨 위에 있는 블럭부터 스택에 Push
         }

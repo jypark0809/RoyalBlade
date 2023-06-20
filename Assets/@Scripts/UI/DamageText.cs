@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DamageText : MonoBehaviour
@@ -9,29 +8,22 @@ public class DamageText : MonoBehaviour
     TextMeshPro _damageText;
     Coroutine _coTextAnimation;
 
-    public void SetInfo(Vector2 pos, int damage, Transform parent = null)
+    public void SetInfo(Vector2 pos, int damage)
     {
         _damageText = GetComponent<TextMeshPro>();
         transform.position = pos;
-
         _damageText.text = $"{damage}";
-        _damageText.alpha = 1;
-        if (parent != null)
-        {
-            //transform.parent = parent;
-            transform.position = parent.GetComponent<Collider2D>().bounds.center;
 
-            //transform.localPosition = Vector3.zero;
-            GetComponent<MeshRenderer>().sortingOrder = 300;
-        }
-
-        if (_coTextAnimation == null)
-            _coTextAnimation = StartCoroutine(CoTextAnimation());
+        if (_coTextAnimation != null)
+            StopCoroutine(_coTextAnimation);
+        _coTextAnimation = StartCoroutine(CoTextAnimation());
     }
 
     float _tick = 0;
     IEnumerator CoTextAnimation()
     {
+        _damageText.alpha = 1;
+
         while (_tick < 1.0f)
         {
             transform.position += Vector3.up * Time.deltaTime;
@@ -40,6 +32,8 @@ public class DamageText : MonoBehaviour
             yield return null;
         }
 
+        _tick = 0;
+        _coTextAnimation = null;
         Managers.Resource.Destroy(gameObject);
     }
 }

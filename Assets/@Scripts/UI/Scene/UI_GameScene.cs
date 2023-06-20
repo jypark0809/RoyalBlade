@@ -144,7 +144,9 @@ public class UI_GameScene : UI_Scene
 
     public void SetHpSlider(int hp, int maxHp)
     {
-        Slider slider = GetObject((int)GameObjects.HpSlider).GetComponent<Slider>();
+        GameObject go = GetObject((int)GameObjects.HpSlider);
+        Slider slider = go.GetComponent<Slider>();
+        // Slider slider = GetObject((int)GameObjects.HpSlider).GetComponent<Slider>();
         slider.value = (float)hp / maxHp;
 
         GetText((int)Texts.MonsterHpText).text = $"{hp} / {maxHp}";

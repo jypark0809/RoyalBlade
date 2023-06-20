@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
+// using Transform = UnityEngine.Transform;
 
 public class ObjectManager
 {
@@ -59,7 +57,7 @@ public class ObjectManager
         }
     }
 
-    public void ShowDamageText(Vector2 pos, int damage, Transform parent, bool isCritical = false)
+    public void ShowDamageText(Vector2 pos, int damage, bool isCritical = false)
     {
         string prefabName;
         if (isCritical)
@@ -69,6 +67,13 @@ public class ObjectManager
 
         GameObject go = Managers.Resource.Instantiate(prefabName, pooling: true);
         DamageText damageText = go.GetOrAddComponent<DamageText>();
-        damageText.SetInfo(pos, damage, parent);
+        damageText.SetInfo(pos, damage);
+    }
+
+    public void ShowDestroyEffect(Vector2 pos)
+    {
+        GameObject go = Managers.Resource.Instantiate("Explosion", pooling: true);
+        BaseEffect effect = go.GetOrAddComponent<BaseEffect>();
+        effect.transform.position = pos;
     }
 }
