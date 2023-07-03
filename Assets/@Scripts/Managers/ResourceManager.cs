@@ -23,8 +23,10 @@ public class ResourceManager
                 Sprite spr = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
                 return spr as T;
             }
+
             return resource as T;
         }
+
         return null;
     }
 
@@ -41,7 +43,6 @@ public class ResourceManager
             return Managers.Pool.Pop(prefab);
 
         GameObject go = Object.Instantiate(prefab, parent);
-
         go.name = prefab.name;
         return go;
     }
@@ -59,14 +60,17 @@ public class ResourceManager
     #endregion
 
     #region Addressable
+    // callback : 로드가 끝났으면 호출하는 함수
     public void LoadAsync<T>(string key, Action<T> callback = null) where T : UnityEngine.Object
     {
+        // dictionary 확인
         if (_resources.TryGetValue(key, out Object resource))
         {
             callback?.Invoke(resource as T);
             return;
         }
 
+        // 리소스 비동기 로딩 시작
         var asyncOperation = Addressables.LoadAssetAsync<T>(key);
         asyncOperation.Completed += (op) =>
         {
@@ -74,6 +78,7 @@ public class ResourceManager
             callback?.Invoke(op.Result);
         };
     }
+
     public void LoadAllAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
     {
         var opHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
